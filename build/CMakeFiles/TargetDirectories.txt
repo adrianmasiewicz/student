@@ -1,0 +1,3 @@
+/home/adrian/Pulpit/p030522/OOP/baza danych/build/CMakeFiles/rebuild_cache.dir
+/home/adrian/Pulpit/p030522/OOP/baza danych/build/CMakeFiles/edit_cache.dir
+/home/adrian/Pulpit/p030522/OOP/baza danych/build/CMakeFiles/Program.out.dir

@@ -1,0 +1,28 @@
+Andrzej
+Muller
+prosta 26/24
+345353
+23442
+m
+*
+Ania
+Muller
+prosta 26a
+453534
+23542
+f
+*
+Agata
+Musiał
+krzywa 2
+435665445
+56545
+f
+*
+Bogdan
+Musiał
+krzywa 2
+435665445
+56545
+f
+*

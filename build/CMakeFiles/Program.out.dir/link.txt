@@ -1,0 +1,1 @@
+/usr/bin/c++     CMakeFiles/Program.out.dir/main.cpp.o CMakeFiles/Program.out.dir/student.cpp.o  -o Program.out 

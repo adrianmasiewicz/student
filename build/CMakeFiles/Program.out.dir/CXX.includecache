@@ -1,0 +1,26 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/adrian/Pulpit/p030522/OOP/baza danych/main.cpp
+cstdlib
+-
+fstream
+-
+iostream
+-
+string
+-
+vector
+-
+student.hpp
+/home/adrian/Pulpit/p030522/OOP/baza danych/student.hpp
+
+/home/adrian/Pulpit/p030522/OOP/baza danych/student.hpp
+string
+-
+
