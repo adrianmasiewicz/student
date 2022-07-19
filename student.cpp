@@ -6,7 +6,7 @@ Student::Student()
       name_("No data"),
       address_("No data"),
       indexNr_("No data"),
-      pesel_(-1),
+      pesel_("No data"),
       gender_('-') {}
 
 Student::Student(string firstName, string name)
@@ -14,10 +14,10 @@ Student::Student(string firstName, string name)
       name_(name),
       address_("No data"),
       indexNr_("No data"),
-      pesel_(-1),
+      pesel_("No data"),
       gender_('-') {}
 
-Student::Student(string firstName, string name, string address, string indexNr, int pesel, char gender)
+Student::Student(string firstName, string name, string address, string indexNr, string pesel, char gender)
     : firstName_(firstName),
       name_(name),
       address_(address),
@@ -43,7 +43,7 @@ string Student::getIndexNr() const {
     return indexNr_;
 }
 
-int Student::getPesel() const {
+string Student::getPesel() const {
     return pesel_;
 }
 
@@ -64,7 +64,7 @@ void Student::setAddress(const string& address) {
 void Student::setIndexNr(const string& indexNr) {
     indexNr_ = indexNr;
 }
-void Student::setPesel(const int pesel) {
+void Student::setPesel(const string& pesel) {
     pesel_ = pesel;
 }
 void Student::setGender(const char& gender) {
