@@ -13,10 +13,13 @@ void loadData(vector<Student>* ptrStudent);
 void addStudent(vector<Student>* ptrStudent);
 void autoSave(vector<Student> ptrStudent);
 void viewStudents(vector<Student> ptrStudent);
+void viewStudent(Student student);
 void searchName(vector<Student> ptrStudent);
 void searchPesel(vector<Student> ptrStudent);
 vector<Student> sortName(vector<Student> students);
 vector<Student> sortPesel(vector<Student> students);
+vector<Student> removeName(vector<Student> students);
+vector<Student> removePesel(vector<Student> students);
 
 int main() {
     int choice;
@@ -25,30 +28,34 @@ int main() {
     loadData(&vecStudents);
     system("clear");
 
-    //if (false)
-        do {
-            cout <<"===========================================================\n";
-            graphicInterface();
+    // if (false)
+    do {
+        cout << "===========================================================\n";
+        graphicInterface();
 
-            cout << "\nWhat you want to do: ";
-            cin >> choice;
+        cout << "\nWhat you want to do: ";
+        cin >> choice;
 
-            if (choice == 9)
-                system("clear");
-            else if (choice == 1)
-                addStudent(&vecStudents);
-            else if (choice == 2)
-                viewStudents(vecStudents);
-            else if (choice == 3)
-                searchName(vecStudents);
-            else if (choice == 4)
-                searchPesel(vecStudents);
-            else if (choice == 5)
-                vecStudents = sortName(vecStudents);
-            else if (choice == 6)
-                vecStudents = sortPesel(vecStudents);
+        if (choice == 9)
+            system("clear");
+        else if (choice == 1)
+            addStudent(&vecStudents);
+        else if (choice == 2)
+            viewStudents(vecStudents);
+        else if (choice == 3)
+            searchName(vecStudents);
+        else if (choice == 4)
+            searchPesel(vecStudents);
+        else if (choice == 5)
+            vecStudents = sortName(vecStudents);
+        else if (choice == 6)
+            vecStudents = sortPesel(vecStudents);
+        else if (choice == 7)
+            vecStudents = removeName(vecStudents);
+        else if (choice == 8)
+            vecStudents = removePesel(vecStudents);
 
-        } while (choice);
+    } while (choice);
 
     autoSave(vecStudents);
     return 0;
@@ -83,7 +90,7 @@ void graphicInterface() {
     cout << "7. Remove by name\n";
     cout << "8. Remove by pesel\n";
     cout << "9. Clear interface\n";
-    cout << "q - exit\n";
+    cout << "Any character to save and exit\n";
 }
 
 void loadData(vector<Student>* ptrStudent) {
@@ -136,15 +143,14 @@ void addStudent(vector<Student>* ptrStudent) {
     cin >> name;
     cout << "Enter a address: ";
     cin >> address;
-    do
-    {
+    do {
         cout << "Enter a nr PESEL: ";
         cin >> pesel;
-        if (pesel.size() != 11){
-            cout <<"Incorrect data (11 digits). ";
+        if (pesel.size() != 11) {
+            cout << "Incorrect data (11 digits). ";
         }
     } while (pesel.size() != 11);
-    
+
     cout << "Enter a gender (m - man, f - female, o - other): ";
     cin >> gender;
 
@@ -154,13 +160,17 @@ void addStudent(vector<Student>* ptrStudent) {
 
 void viewStudents(vector<Student> ptrStudent) {
     for (int i = 0; i < ptrStudent.size(); i++) {
-        cout << "INDEX: " << ptrStudent[i].getIndexNr() << " | ";
-        cout << "First name: " << ptrStudent[i].getFirstName() << " | ";
-        cout << "Name: " << ptrStudent[i].getName() << " | ";
-        cout << "Address: " << ptrStudent[i].getAddress() << " | ";
-        cout << "PESEL: " << ptrStudent[i].getPesel() << " | ";
-        cout << "Sex: " << ptrStudent[i].getGender() << " |\n";
+        viewStudent(ptrStudent[i]);
     }
+}
+
+void viewStudent(Student s1) {
+    cout << "INDEX: " << s1.getIndexNr() << " | ";
+    cout << "First name: " << s1.getFirstName() << " | ";
+    cout << "Name: " << s1.getName() << " | ";
+    cout << "Address: " << s1.getAddress() << " | ";
+    cout << "PESEL: " << s1.getPesel() << " | ";
+    cout << "Sex: " << s1.getGender() << " |\n";
 }
 
 void searchName(vector<Student> ptrStudent) {
@@ -203,8 +213,8 @@ vector<Student> sortName(vector<Student> students) {
     vector<Student> temporaryStudents;
     int nrStudentDelete;
     Student s1;
-    
-    int kEnd = students.size(); 
+
+    int kEnd = students.size();
     for (int k = 0; k < kEnd; k++) {
         s1 = students[0];
         nrStudentDelete = 0;
@@ -232,8 +242,8 @@ vector<Student> sortPesel(vector<Student> students) {
     vector<Student> temporaryStudents;
     int nrStudentDelete;
     Student s1;
-    
-    int kEnd = students.size(); 
+
+    int kEnd = students.size();
     for (int k = 0; k < kEnd; k++) {
         s1 = students[0];
         nrStudentDelete = 0;
@@ -255,4 +265,66 @@ vector<Student> sortPesel(vector<Student> students) {
     }
     viewStudents(temporaryStudents);
     return temporaryStudents;
+}
+
+vector<Student> removeName(vector<Student> students) {
+    string sNameRemove;
+    int iNameRemove;
+    int howMuch = 0;
+
+    cout << "Enter the name of the student you want to remove: ";
+    cin >> sNameRemove;
+
+    for (int i = 0; i < students.size(); i++) {
+        if (sNameRemove == students[i].getName()) {
+            cout << i << " : ";
+            viewStudent(students[i]);
+            howMuch++;
+            iNameRemove = i;
+        }
+    }
+
+    if (howMuch == 0) {
+        cout << "No such student was found\n";
+    } else if (howMuch == 1) {
+        students.erase(students.begin() + iNameRemove, students.begin() + iNameRemove + 1);
+        cout << "Student removed\n";
+    } else if (howMuch > 1) {
+        cout << "Enter the student number: ";
+        cin >> iNameRemove;
+        students.erase(students.begin() + iNameRemove, students.begin() + iNameRemove + 1);
+        cout << "Student removed\n";
+    }
+    return students;
+}
+
+vector<Student> removePesel(vector<Student> students) {
+    string sPeselRemove;
+    int iPeselRemove;
+    int howMuch = 0;
+
+    cout << "Enter the Pesel of the student you want to remove: ";
+    cin >> sPeselRemove;
+
+    for (int i = 0; i < students.size(); i++) {
+        if (sPeselRemove == students[i].getPesel()) {
+            cout << i << " : ";
+            viewStudent(students[i]);
+            howMuch++;
+            iPeselRemove = i;
+        }
+    }
+
+    if (howMuch == 0) {
+        cout << "No such student was found\n";
+    } else if (howMuch == 1) {
+        students.erase(students.begin() + iPeselRemove, students.begin() + iPeselRemove + 1);
+        cout << "Student removed\n";
+    } else if (howMuch > 1) {
+        cout << "Enter the student number: ";
+        cin >> iPeselRemove;
+        students.erase(students.begin() + iPeselRemove, students.begin() + iPeselRemove + 1);
+        cout << "Student removed\n";
+    }
+    return students;
 }
